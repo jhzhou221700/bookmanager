@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import django.apps
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -37,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'book.apps.BookConfig'
+    #注册bookapp
 ]
 
 MIDDLEWARE = [
@@ -73,7 +77,8 @@ WSGI_APPLICATION = 'djangoProject3.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+#关系型数据库
+#过度 了解
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
