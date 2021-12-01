@@ -57,6 +57,7 @@ ROOT_URLCONF = 'djangoProject3.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        #告知系统 模板发文件的存放位置
         'DIRS': [BASE_DIR / 'templates']
         ,
         'APP_DIRS': True,
