@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os.path
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-u4a!$)#xd&=5g&dubhwvplpj@74q5rfg4lhklfy5hz4qdod6%v
 # SECURITY WARNING: don't run with debug turned on in production!
 # 调试模式 在开发中打开方便查看问题  项目上线后关闭
 DEBUG = True
-
+#允许以什么样的方式访问我们的地址
 ALLOWED_HOSTS = []
 
 
@@ -124,9 +124,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
+# 访问时的路由为：http://127.0.0.1:8000/static/aboat.png
+#其中aboat.png为图片名称，与static url配置的参数一致
 STATIC_URL = '/static/'
+#告诉系统图片放在哪里
+STATICFILES_DIRS=[
 
+
+    os.path.join(BASE_DIR,"static")
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
