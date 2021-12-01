@@ -1,4 +1,5 @@
 from django.urls import path
+#导入模型视图
 from book.views import index
 #固定写法
 
