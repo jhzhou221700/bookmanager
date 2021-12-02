@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os
 import os.path
 from pathlib import Path
 
@@ -82,9 +83,37 @@ WSGI_APPLICATION = 'djangoProject3.wsgi.application'
 #过度 了解
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+
+        # 改为mysql
+        'ENGINE': 'django.db.backends.mysql',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        "HOST":"127.0.0.1",#主机
+        "PORT":'3306',
+        "USER":"root",
+        "PASSWORD":"fxxh521",
+        'NAME': "book",#创建的表的名字
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+    #     此时会报错 did you install mysqlclient? 到中断中 pip install mysqlclient
+        #注意使用最新的mysql会报错，原因在于django暂不支持新的加密方式caching_sha2_password，解决方案为：
+
+
+            # 1.登录mysql，连接用户为root。
+            # > mysql -u root -p
+            #
+            # 2.执行命令查看加密方式
+            # > use mysql;
+            # > select user,plugin from user where user='root';
+            #
+            # 3.执行命令修改加密方式
+            # > alter user 'root'@'localhost' identified with mysql_native_password by 'yourpassword'
+            #
+            # 4.属性权限使配置生效
+            # > flush privileges
+        # 配置完成后重新进行表的迁移工作
+        # 1 python manage.py makemigrations
+        # No changes detected
+        # 2 python manage.py migrate
+        }
 }
 
 
