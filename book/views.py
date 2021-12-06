@@ -55,4 +55,14 @@ def index(request):
 #方式2
 #get方法后面没有update
 # Bookinfo.objects.filter(id=6).update(name="过滤方法")
+
+
+
+########删除数据###############
+# 方式1
+# book=Bookinfo.objects.get(id=6)
+# book.delete()
+# 删除份两种  物理删除（这条记录的数据删除）   逻辑删除（修改标记位，例如订单删除，现实删除，系统仍然存储）
+# 方式2
+# Bookinfo.objects.filter(id=5).delete()
 # Create your views here.
