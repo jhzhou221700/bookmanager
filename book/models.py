@@ -45,9 +45,27 @@ class Bookinfo(models.Model):
     # pass
 class Peopleinfo(models.Model):
     #继承自model 方便增删改查操作
-    name=models.CharField(max_length=10)
-    gender=models.BooleanField()
-    #外键约束，人物属于哪本书
+    #定义一个有序字典
+    GENDER__CHOICE=(
+        (1,"male"),
+        (0,"female")
+    )
+    name=models.CharField(max_length=10,unique=True)
+    #性别从哪里选
+    gender=models.SmallIntegerField(choices=GENDER__CHOICE,default=1)
+
+    despriction=models.CharField(max_length=100,null=True)
+    is_delete=models.BooleanField(default=False)
+    # 外键约束，人物属于哪本书
+    # 关于外键 系统自动为外键添加id
+    #外键的级联操作
+    #主表 一对多 一
+    #从表 多
+
+    #主键的一条数据如果删除了，从 表有关联的数据如何处理？
+    #设置set_null
+    #抛出异常，不让删除 protect
+    #级联设置  从表随主表一起消失 cascade,此处设置为级联操作
     book=models.ForeignKey(Bookinfo,on_delete=models.CASCADE)
     def __str__(self):
         return self.name
