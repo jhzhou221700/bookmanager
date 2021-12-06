@@ -30,11 +30,11 @@ from django.db import models
 #继承自modles.modle
 class Bookinfo(models.Model):
     #继承自model 方便增删改查操作
-    name=models.CharField(max_length=10,unique=True)
+    name=models.CharField(max_length=10,unique=True,verbose_name="名称")
     pub_date=models.DateField(null=True)
-    readcount=models.IntegerField(default=0)
-    commentcount=models.IntegerField(default=0)
-    is_deleate=models.BooleanField(default=False)
+    readcount=models.IntegerField(default=0,verbose_name="阅读量")
+    commentcount=models.IntegerField(default=0,verbose_name="评论")
+    is_delete=models.BooleanField(default=False,verbose_name="是否删除")
     #在数据库中重写表的名字
     class Meta:
         db_table="bookinfo"
@@ -50,12 +50,12 @@ class Peopleinfo(models.Model):
         (1,"male"),
         (0,"female")
     )
-    name=models.CharField(max_length=10,unique=True)
+    name=models.CharField(max_length=10,unique=True,verbose_name="名称")
     #性别从哪里选
-    gender=models.SmallIntegerField(choices=GENDER__CHOICE,default=1)
+    gender=models.SmallIntegerField(choices=GENDER__CHOICE,default=1,verbose_name="性别")
 
-    despriction=models.CharField(max_length=100,null=True)
-    is_delete=models.BooleanField(default=False)
+    description=models.CharField(max_length=100,null=True,verbose_name="描述")
+    is_delete=models.BooleanField(default=False,verbose_name="是否删除")
     # 外键约束，人物属于哪本书
     # 关于外键 系统自动为外键添加id
     #外键的级联操作
@@ -66,7 +66,9 @@ class Peopleinfo(models.Model):
     #设置set_null
     #抛出异常，不让删除 protect
     #级联设置  从表随主表一起消失 cascade,此处设置为级联操作
-    book=models.ForeignKey(Bookinfo,on_delete=models.CASCADE)
+    book=models.ForeignKey(Bookinfo,on_delete=models.CASCADE,verbose_name="图书")
+    class Meta:
+        db_table="peopleinfo"
     def __str__(self):
         return self.name
 # Create your models here.
