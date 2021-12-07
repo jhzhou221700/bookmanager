@@ -105,16 +105,16 @@ def index(request):
 # Bookinfo.objects.get(pk=1) primary key 主键值等于1
 # Bookinfo.objects.filter(id=1) 返回的是包含一个元素的列表
 # 查询书名包含'湖'的图书
-Bookinfo.objects.get(name__contains="湖")
-# 查询书名以'部'结尾的图书
-Bookinfo.objects.get(name__endswith="部")
-# 查询书名为空的图书
-try:
-    Bookinfo.objects.get(name__exact="")
-except Bookinfo.DoesNotExist:
-    print("不存在")
-# 查询编号为1或3或5的图书
-Bookinfo.objects.filter(id__in=[1,3,5])
+# Bookinfo.objects.get(name__contains="湖")
+# # 查询书名以'部'结尾的图书
+# Bookinfo.objects.get(name__endswith="部")
+# # 查询书名为空的图书
+# try:
+#     Bookinfo.objects.get(name__exact="")
+# except Bookinfo.DoesNotExist:
+#     print("不存在")
+# # 查询编号为1或3或5的图书
+# Bookinfo.objects.filter(id__in=[1,3,5])
 # 查询编号大于3的图书
 # Bookinfo.objects.filter(id__gt=3) 大于gt 小于lt 大于等于
 # 查询1980年发表的图书
