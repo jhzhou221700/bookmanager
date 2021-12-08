@@ -42,6 +42,8 @@ class Bookinfo(models.Model):
         # #用于站点管理
     def __str__(self):
         return self.name
+    # peopleinfo_set=[Peopleinfo1,Peopleinfo1,]
+    # 一对多的模型中，系统自动为我们添加一个关联模型：模型类名小写_set
     # pass
 class Peopleinfo(models.Model):
     #继承自model 方便增删改查操作

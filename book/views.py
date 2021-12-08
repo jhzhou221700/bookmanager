@@ -158,4 +158,19 @@ Bookinfo.objects.filter(Q(readcount__gt=20)&~Q(id__lt=3))
 # object.aggregate
 
 # 查询总阅读量
-Bookinfo.objects.aggregate(Sum('readcount'))
+# Bookinfo.objects.aggregate(Sum('readcount'))
+
+#级联查询
+# 查询书籍为1的所有人物信息
+# 数据里并没有人物信息
+# 1对多的查询
+# book=Bookinfo.objects.get(id=1)
+# book.peopleinfo_set.all()
+# ####################小写注意
+
+# 查询人物为1的书籍信息
+# 多对一的查询
+#查询到人
+# person=Peopleinfo.objects.get(id__exact=1)
+#人里面的实例化对象的属性
+# person.book.name
