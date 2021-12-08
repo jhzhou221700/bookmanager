@@ -146,3 +146,16 @@ Bookinfo.objects.filter(Q(readcount__gt=20)&~Q(id__lt=3))
 
 # Bookinfo.objects.filter(readcount__gt=20).filter(id__lt=3)
 # Bookinfo.objects.filter(readcount__gt=20,id__lt=3)
+
+
+######聚合函数####
+# 使用aggregate()过滤器调用聚合函数。
+# 聚合函数包括：
+# Avg平均，Count数量，Max最大，Min最小，Sum求和，
+# 被定义在django.db.models中。
+# from  django.db.models import Sum,Avg,Count,Min,Max
+# 使用方法：
+# object.aggregate
+
+# 查询总阅读量
+Bookinfo.objects.aggregate(Sum('readcount'))
