@@ -118,4 +118,7 @@ def index(request):
 # 查询编号大于3的图书
 # Bookinfo.objects.filter(id__gt=3) 大于gt 小于lt 大于等于
 # 查询1980年发表的图书
+Bookinfo.objects.filter(pub_date__contains="1980")
+Bookinfo.objects.filter(pub_date__year="1980")
 # 查询1990年1月1日后发表的图书
+Bookinfo.objects.filter(pub_date__gt="1990-01-01")
