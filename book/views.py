@@ -2,6 +2,8 @@ from django.shortcuts import render
 #导入请求与相应
 from django.http import HttpRequest
 from  django.http import HttpResponse
+from django.db.models import F
+from django.db.models import Q
 #定义视图函数
 """
 视图函数的要求
@@ -118,7 +120,29 @@ def index(request):
 # 查询编号大于3的图书
 # Bookinfo.objects.filter(id__gt=3) 大于gt 小于lt 大于等于
 # 查询1980年发表的图书
-Bookinfo.objects.filter(pub_date__contains="1980")
-Bookinfo.objects.filter(pub_date__year="1980")
-# 查询1990年1月1日后发表的图书
-Bookinfo.objects.filter(pub_date__gt="1990-01-01")
+# Bookinfo.objects.filter(pub_date__contains="1980")
+# Bookinfo.objects.filter(pub_date__year="1980")
+# # 查询1990年1月1日后发表的图书
+# Bookinfo.objects.filter(pub_date__gt="1990-01-01")
+#日期的合适 yyyy-mm-dd
+
+#属性的比较 引用F属性
+
+# from django.db.models import F
+# 以fliter为例
+# Bookinfo.objects.filter(readcount__gt=F("commentcount"))
+#查找阅读量大于评论量的数据
+
+#Q对象 或者查询
+# from django.db.models import Q
+# 查询阅读量大于20，或编号小于3的图书，只能使用Q对象实现
+# Bookinfo.objects.filter(Q(readcount__gt=20)|Q(id__lt=3))
+# 并且
+# Bookinfo.objects.filter(Q(readcount__gt=20)&Q(id__lt=3))
+#非 阅读量大于20且id大于3
+Bookinfo.objects.filter(Q(readcount__gt=20)&~Q(id__lt=3))
+#并且查询
+#查询阅读；量大于20并且阅读量小于3 的数据
+
+# Bookinfo.objects.filter(readcount__gt=20).filter(id__lt=3)
+# Bookinfo.objects.filter(readcount__gt=20,id__lt=3)

@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-# from book.views import index
+from book.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', index),
+    #空的默认索引到index
     # path('index/', index),#创建视图函数
     path('', include('book.urls'))
     #访问时需要添加工程的urls+子应用的urls
