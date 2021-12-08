@@ -174,3 +174,15 @@ Bookinfo.objects.filter(Q(readcount__gt=20)&~Q(id__lt=3))
 # person=Peopleinfo.objects.get(id__exact=1)
 #人里面的实例化对象的属性
 # person.book.name
+
+
+#关联查询的过滤查询
+# 模型类名.objects.filter(关联模型类名小写__字段名__运算符=值)
+# 查询图书，要求图书人物为"郭靖"
+# Bookinfo.objects.filter(peopleinfo__name__exact="郭靖")
+# # 查询图书，要求图书中人物的描述包含"八"
+# Bookinfo.objects.filter(peopleinfo__description__contains="八")
+# #查询书名为天龙八部的所有人物
+# Peopleinfo.objects.filter(book__name__exact="天龙八部")
+# #查询图书阅读量大于30的所有人物
+# Peopleinfo.objects.filter(book__readcount__gt="30")
