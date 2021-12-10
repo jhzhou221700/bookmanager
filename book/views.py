@@ -186,3 +186,54 @@ Bookinfo.objects.filter(Q(readcount__gt=20)&~Q(id__lt=3))
 # Peopleinfo.objects.filter(book__name__exact="天龙八部")
 # #查询图书阅读量大于30的所有人物
 # Peopleinfo.objects.filter(book__readcount__gt="30")
+
+########查询集########
+# 概念 查询集  ：从数据库中获取结果的集合
+# 当调用如下过滤器方法时，Django会返回查询集（而不是简单的列表）：
+#
+# all()：返回所有数据。
+# filter()：返回满足条件的数据。
+# exclude()：返回满足条件之外的数据。
+# order_by()：对结果进行排序。
+
+# 对查询集的结果可以再次调用过滤器进行过滤度
+# 从SQL的角度讲，查询集与select语句等价，过滤器像where、limit、order by子句
+# books=Bookinfo.objects.filter(readcount__gt=30).order_by("pub_date")
+
+#查询集的两大特性
+# 1 惰性执行
+# 创建查询集的时候不访问数据库，在调用数据库的时候才会执行
+# 2 缓存
+# 使用同一个查询集，第一次使用时会发生数据库的查询，
+# 然后Django会把结果缓存下来，
+# 再次使用这个查询集时会使用缓存的数据，
+# 减少了数据库的查询次数。
+# books=BookInfo.objects.all()
+#
+# [book.id for book in books]
+#
+# [book.id for book in books]
+
+# 3限制查询集
+# 对查询集进行取下标或切片的操作 等同于sql中的limit和offset子句。
+
+# 对查询集进行切片后返回一个新的查询集，不会立即执行查询。
+# 如果获取一个对象，直接使用[0]，等同于[0:1].get()，
+# 但是如果没有数据，[0]引发IndexError异常，
+# [0:1].get()如果没有数据引发DoesNotExist异常。
+# >>> books = BookInfo.objects.all()[0:2] 现在还没执行  调用时才执行
+# >>> books
+# <QuerySet [<BookInfo: 射雕英雄传>, <BookInfo: 天龙八部>]>
+
+#4 ####
+# 分页
+#查询数据
+# books = BookInfo.objects.all()
+# #导入分页类
+# from django.core.paginator import Paginator 导入分页工具
+# #创建分页实例
+# paginator=Paginator(books,2)  每两个book分为一页
+# #获取指定页码的数据
+# page_books = paginator.page(1)   读取第一页上的book信息
+# #获取分页数据
+# total_page=paginator.num_pages 查看总共有多少页
